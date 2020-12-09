@@ -14,38 +14,27 @@ let In2 = 0
 let In1 = 0
 basic.showIcon(IconNames.No)
 basic.forever(function () {
-    if (pins.analogReadPin(AnalogPin.P4) > 520 && pins.analogReadPin(AnalogPin.P10) > 520) {
+    if (pins.analogReadPin(AnalogPin.P4) > 520) {
         In1 = 1
         In2 = 0
-        In3 = 1
-        In4 = 0
         EnA = pins.analogReadPin(AnalogPin.P4) - 512
-        EnB = pins.analogReadPin(AnalogPin.P10) - 512
-    } else if (pins.analogReadPin(AnalogPin.P4) > 520 && pins.analogReadPin(AnalogPin.P10) < 500) {
-        In1 = 1
-        In2 = 0
-        In3 = 0
-        In4 = 1
-        EnA = pins.analogReadPin(AnalogPin.P4) - 512
-        EnB = 512 - pins.analogReadPin(AnalogPin.P10)
-    } else if (pins.analogReadPin(AnalogPin.P4) < 500 && pins.analogReadPin(AnalogPin.P10) > 520) {
+    } else if (pins.analogReadPin(AnalogPin.P4) < 500) {
         In1 = 0
         In2 = 1
+        EnA = 512 - pins.analogReadPin(AnalogPin.P4)
+    } else {
+        EnA = 0
+    }
+    if (pins.analogReadPin(AnalogPin.P10) > 520) {
         In3 = 1
         In4 = 0
-        EnA = 512 - pins.analogReadPin(AnalogPin.P4)
         EnB = pins.analogReadPin(AnalogPin.P10) - 512
-    } else if (pins.analogReadPin(AnalogPin.P4) < 500 && pins.analogReadPin(AnalogPin.P10) < 500) {
-        In1 = 0
-        In2 = 1
-        In3 = 0
-        In4 = 1
-        EnA = 512 - pins.analogReadPin(AnalogPin.P4)
+    } else if (pins.analogReadPin(AnalogPin.P10) < 500) {
+        In3 = 1
+        In4 = 0
         EnB = 512 - pins.analogReadPin(AnalogPin.P10)
     } else {
-        In1 = 0
-        In2 = 0
-        In3 = 0
-        In4 = 0
+        EnB = 0
     }
+    Kjør()
 })
